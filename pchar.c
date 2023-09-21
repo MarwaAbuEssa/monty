@@ -23,7 +23,6 @@ void _pchar(stack_t **stack, unsigned int line_number)
 					     "value out of range"));
 		return;
 	}
-
 	printf("%c\n", (*stack)->next->n);
 }
 
