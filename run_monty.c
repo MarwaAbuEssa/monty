@@ -119,7 +119,7 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int)
 int run_monty(FILE *script_fd)
 {
 	stack_t *stack = NULL;
-	char *line = NULL;
+	char *line = '\0';
 	size_t exit_status = EXIT_SUCCESS;
 	int o_len = 0;
 	unsigned int line_number = 0, prev_tok_len = 0;
@@ -128,7 +128,7 @@ int run_monty(FILE *script_fd)
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	while (fgets(line, o_len, script_fd))
+	while (fgets(line, o_len, script_fd) != 0)
 	{
 		line_number++;
 		op_toks = strtow(line, DELIMS);
