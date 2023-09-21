@@ -25,7 +25,7 @@ int main(int argc, char **argv)
 	file_script = fopen(argv[1], "r");
 	if (file_script == NULL)
 		return (file_failure(argv[1]));
-	exit_code = run_monty(file_script);
+	exit_code = start(file_script);
 	fclose(file_script);
 	return (exit_code);
 }
