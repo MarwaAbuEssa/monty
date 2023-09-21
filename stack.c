@@ -1,9 +1,3 @@
-/*
- * File: stack.c
- * Auth: Bennett Dixon
- *       Brennan D Baraban
- */
-
 #include "monty.h"
 #include <string.h>
 
@@ -42,7 +36,7 @@ int init_stack(stack_t **stack)
 
 	s = malloc(sizeof(stack_t));
 	if (s == NULL)
-		return (malloc_error());
+		return (malloc_failure());
 
 	s->n = STACK;
 	s->prev = NULL;
