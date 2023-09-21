@@ -23,3 +23,4 @@ void _pop(stack_t **stack, unsigned int line_number)
 		next->prev = *stack;
 	(*stack)->next = next;
 }
+
