@@ -48,8 +48,7 @@ int main(int argc, char **argv)
 int starting(FILE *file_script)
 {
 	stack_t *stack = NULL;
-	char *line = NULL;
-	//size_t len = 0, 
+	char *line = NULL; 
     exit_status = EXIT_SUCCESS;
 	unsigned int line_number = 0, prev_tok_len = 0;
 	void (*op_func)(stack_t**, unsigned int);
