@@ -52,11 +52,13 @@ int starting(FILE *file_script)
 	size_t exit_status = EXIT_SUCCESS;
 	unsigned int line_number = 0, prev_tok_len = 0;
 	void (*op_func)(stack_t**, unsigned int);
+    int len = 0;
+
 
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	while (fgets(line, sizeof(line), file_script))
+	while (fgets(line, &len, file_script))
 	{
 		line_number++;
 		op_Code = strtow(line, DELIMS);
@@ -67,7 +69,7 @@ int starting(FILE *file_script)
 			free_stack(&stack);
 			return (malloc_failure());
 		}
-		else if (op_Code[0][0] == '#') /* comment line */
+		else if (op_Code[0][0] == '#')
 		{
 			free_tokens();
 			continue;
