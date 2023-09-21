@@ -1,3 +1,4 @@
+
 #include "monty.h"
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -55,7 +56,7 @@ int starting(FILE *file_script)
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	while (getline(&line, &len, file_script) != -1)
+	while (fgets(&line, &len, file_script) != -1)
 	{
 		line_number++;
 		op_Code = strtow(line, DELIMS);
