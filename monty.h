@@ -10,7 +10,7 @@
 #define DELIMS " \n\t\a\b"
 
 
-extern char **op_toks;
+extern char **op_Code;
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -41,6 +41,12 @@ typedef struct instruction_s
 	char *opcode;
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
+
+/* MOnty Failure */
+int int_failure(unsigned int line_number);
+int usage_failure(void);
+int open_failure(char *filename);
+int unknown_failure(char *opcode, unsigned int line_number);
 
 
 void _push(stack_t **stack, unsigned int line_number);
