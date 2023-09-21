@@ -5,7 +5,7 @@ void _stack(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t **stack);
 int create(stack_t **stack);
 int stack_Type(stack_t *stack);
-
+int stack_failure(unsigned int line_number, char *op);
 
 /**
  * _stack -  queue to a stack.
@@ -36,12 +36,9 @@ void free_stack(stack_t **stack)
 }
 
 /**
- * create - Initializes a stack_t stack with beginning
- *              stack and ending queue nodes.
- * @stack: A pointer to an unitialized stack_t stack.
- *
- * Return: If an error occurs - EXIT_FAILURE.
- *         Otherwise - EXIT_SUCCESS.
+ * create - create a  stack.
+ * @stack: stack pointer.
+ * Return: EXIT_FAILURE or EXIT_SUCCESS.
  */
 int create(stack_t **stack)
 {
@@ -61,13 +58,9 @@ int create(stack_t **stack)
 }
 
 /**
- * stack_Type - Checks if a stack_t linked list is in stack or queue mode.
- * @stack: A pointer to the top (stack) or bottom (queue)
- *         of a stack_t linked list.
- *
- * Return: If the stack_t is in stack mode - STACK (0).
- *         If the stack_t is in queue mode - QUEUE (1).
- *         Otherwise - 2.
+ * stack_Type - get type of datasctructure.
+ * @stack: stack or queue pointer.
+ * Return:  (0) or (1) or 2.
  */
 int stack_Type(stack_t *stack)
 {
@@ -76,4 +69,16 @@ int stack_Type(stack_t *stack)
 	else if (stack->n == QUEUE)
 		return (QUEUE);
 	return (2);
+}
+
+/**
+ * stack_failure - stack failure error message.
+ * @line_number: line number .
+ * @op: operation .
+ * Return: EXIT_FAILURE.
+ */
+int stack_failure(unsigned int line_number, char *op)
+{
+	fprintf(stderr, "L%u: can't %s, stack too short\n", line_number, op);
+	return (EXIT_FAILURE);
 }
