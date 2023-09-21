@@ -52,9 +52,9 @@ typedef struct instruction_s
 void free_stack(stack_t **stack);
 int create(stack_t **stack);
 int stack_Type(stack_t *stack);
-void free_tokens(void);
-unsigned int token_arr_len(void);
-int run_monty(FILE *script_fd);
+void free_opcode(void);
+unsigned int opcode_length(void);
+int start(FILE *file_script);
 void set_failure(int code);
 
 

@@ -73,7 +73,7 @@ void set_failure(int code)
 	char *exit_str = NULL;
 	char **new_toks = NULL;
 
-	toks_len = token_arr_len();
+	toks_len = opcode_length();
 	new_toks = malloc(sizeof(char *) * (toks_len + 2));
 	if (!op_Code)
 	{
