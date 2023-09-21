@@ -48,6 +48,8 @@ int usage_failure(void);
 int open_failure(char *filename);
 int unknown_failure(char *opcode, unsigned int line_number);
 int pint_failure(unsigned int line_number);
+int pop_failure(unsigned int line_number);
+
 /* helper*/
 char *to_string(int n);
 int starting(FILE *file_script);
