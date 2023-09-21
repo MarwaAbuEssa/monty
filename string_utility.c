@@ -1,90 +1,155 @@
 #include <stdlib.h>
 
-char *get_int(int num);
-unsigned int _abs(int);
-int buffer_length(unsigned int num, unsigned int base);
-void buffer_fill(unsigned int num, unsigned int base,
-		       char *buff, int buff_size);
+char **strtow(char *str, char *delims);
+int splitter(char ch, char *delims);
+int w_length(char *str, char *delims);
+int w_count(char *str, char *delims);
+char *w_next(char *str, char *delims);
 
 /**
- * get_int - convert int ot string
- * @num: number 
- * Return: string or null.
+ * strtow - split string to words
+ * @str: string
+ * @delims: delimitors
+ * Return: array of  words
  */
-char *get_int(int num)
+
+char **strtow(char *str, char *delims)
 {
-	unsigned int temp;
-	int length = 0;
-	long num_l = 0;
-	char *ret;
+	char **words = NULL;
+	int wc, wordLen, n, i = 0;
 
-	temp = _abs(num);
-	length = buffer_length(temp, 10);
-
-	if (num < 0 || num_l < 0)
-		length++;
-	ret = malloc(length + 1);
-	if (!ret)
+	if (str == NULL || !*str)
 		return (NULL);
+	wc = w_count(str, delims);
 
-	buffer_fill(temp, 10, ret, length);
-	if (num < 0 || num_l < 0)
-		ret[0] = '-';
 
-	return (ret);
-}
-
-/**
- * _abs - absolute value
- * @i: integer
- * Return: integer abs 
- */
-unsigned int _abs(int i)
-{
-	if (i < 0)
-		return (-(unsigned int)i);
-	return ((unsigned int)i);
-}
-
-/**
- * buffer_length - buffer length
- * @num: number 
- * @base: base of number
- * Return: integer
- */
-int buffer_length(unsigned int num, unsigned int base)
-{
-	int len = 1;
-
-	while (num > base - 1)
+	if (wc == 0)
+		return (NULL);
+	words = malloc((wc + 1) * sizeof(char *));
+	if (words == NULL)
+		return (NULL);
+	while (i < wc)
 	{
-		len++;
-		num /= base;
+		wordLen = w_length(str, delims);
+		if (splitter(*str, delims))
+		{
+			str = w_next(str, delims);
+		}
+		words[i] = malloc((wordLen + 1) * sizeof(char));
+		if (words[i] == NULL)
+		{
+			while (i >= 0)
+			{
+				i--;
+				free(words[i]);
+			}
+			free(words);
+			return (NULL);
+		}
+		n = 0;
+		while (n < wordLen)
+		{
+			words[i][n] = *(str + n);
+			n++;
+		}
+		words[i][n] = '\0';
+		str = w_next(str, delims);
+		i++;
 	}
-	return (len);
+	words[i] = NULL;
+	return (words);
 }
 
 /**
- * buffer_fill - fills buffer
- * @num: number
- * @base: base of number
- * @buff: buffer
- * @buff_size: size of buffer
+ * splitter - delimitor char
+ * @ch: character
+ * @delims:  delimitors
+ * Return: 1 /0
  */
-void buffer_fill(unsigned int num, unsigned int base,
-			char *buff, int buff_size)
-{
-	int rem, i = buff_size - 1;
 
-	buff[buff_size] = '\0';
-	while (i >= 0)
+int splitter(char ch, char *delims)
+{
+	int i = 0;
+
+	while (delims[i])
 	{
-		rem = num % base;
-		if (rem > 9)
-			buff[i] = rem + 87;
-		else
-			buff[i] = rem + '0';
-		num /= base;
-		i--;
+		if (delims[i] == ch)
+			return (1);
+		i++;
 	}
+	return (0);
+}
+
+/**
+ * w_length -  word length
+ * @str: string
+ * @delims: delimitors
+ * Return:  length
+ */
+
+int w_length(char *str, char *delims)
+{
+	int wLen = 0, pending = 1, i = 0;
+
+	while (*(str + i))
+	{
+		if (splitter(str[i], delims))
+			pending = 1;
+		else if (pending)
+		{
+			wLen++;
+		}
+		if (wLen > 0 && splitter(str[i], delims))
+			break;
+		i++;
+	}
+	return (wLen);
+}
+
+/**
+ * w_count - words count
+ * @str: string
+ * @delims: delimitors
+ * Return: words length
+ */
+
+int w_count(char *str, char *delims)
+{
+	int wc = 0, pending = 1, i = 0;
+
+	while (*(str + i))
+	{
+		if (splitter(str[i], delims))
+			pending = 1;
+		else if (pending)
+		{
+			pending = 0;
+			wc++;
+		}
+		i++;
+	}
+	return (wc);
+}
+
+/**
+ * w_next - move next word
+ * @str: string
+ * @delims: delimitors
+ * Return: next
+ */
+
+char *w_next(char *str, char *delims)
+{
+	int pending = 0;
+	int i = 0;
+
+	while (*(str + i))
+	{
+		if (splitter(str[i], delims))
+			pending = 1;
+		else if (pending)
+			break;
+		i++;
+	}
+	return (str + i);
 }
