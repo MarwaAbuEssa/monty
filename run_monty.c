@@ -178,7 +178,7 @@ int run_monty(FILE *script_fd)
 }
 
 
-ssize_t mygetline(char **lineptr, size_t *n, FILE *stream)
+ssize_t mygetline(char **lineptr, size_t *n, FILE *script_fd)
 {
     ssize_t i = 0;
     int c;
