@@ -124,7 +124,7 @@ int run_monty(FILE *script_fd)
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	while (mygetline(line, &len, script_fd) != 0)
+	while (fgets(line, sizeof(line), script_fd) != NULL)
 	{
 		line_number++;
 		op_toks = strtow(line, DELIMS);
