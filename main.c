@@ -6,6 +6,9 @@
 
 char **op_Code = NULL;
 void free_tokens(void);
+void free_stack(stack_t **stack);
+int init_stack(stack_t **stack);
+int get_type(stack_t *stack);
 
 int is_empty_line(char *line, char *delims);
 void (*get_op_func(char *opcode))(stack_t**, unsigned int);
