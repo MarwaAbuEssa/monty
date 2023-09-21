@@ -1,6 +1,6 @@
 #include "monty.h"
 
-
+char **op_Code;
 unsigned int code_length(void);
 
 /**
