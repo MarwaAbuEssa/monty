@@ -138,7 +138,7 @@ int run_monty(FILE *script_fd)
 		if (op_func == NULL)
 		{
 			free_stack(&stack);
-			exit_status = unknown_op_failure(op_Code[0], line_number);
+			exit_status = unknown_failure(op_Code[0], line_number);
 			free_tokens();
 			break;
 		}

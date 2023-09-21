@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 		return (usage_failure());
 	script_fd = fopen(argv[1], "r");
 	if (script_fd == NULL)
-		return (f_open_failure(argv[1]));
+		return (file_failure(argv[1]));
 	exit_code = run_monty(script_fd);
 	fclose(script_fd);
 	return (exit_code);

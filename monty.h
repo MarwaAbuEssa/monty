@@ -83,8 +83,8 @@ char *get_int(int n);
 
 int usage_failure(void);
 int malloc_failure(void);
-int f_open_failure(char *filename);
-int unknown_op_failure(char *opcode, unsigned int line_number);
+int file_failure(char *filename);
+int unknown_failure(char *opcode, unsigned int line_number);
 int int_failure(unsigned int line_number);
 int pop_failure(unsigned int line_number);
 int pint_failure(unsigned int line_number);
