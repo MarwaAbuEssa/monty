@@ -24,18 +24,18 @@ void _push(stack_t **stack, unsigned int line_number)
 
 	if (op_Code[1] == NULL)
 	{
-		set_error(no_int_error(line_number));
+		set_error(int_failure(line_number));
 		return;
 	}
 
 	for (i = 0; op_Code[1][i]; i++)
 	{
 		if (op_Code[1][i] == '-' && i == 0)
-			continue;
+				continue;
 		if (op_Code[1][i] < '0' || op_Code[1][i] > '9')
 		{
-			set_error(no_int_error(line_number));
-			return;
+				set_error(int_failure(line_number));
+					return;
 		}
 	}
 	pointer->n = atoi(op_Code[1]);
@@ -46,14 +46,14 @@ void _push(stack_t **stack, unsigned int line_number)
 		pointer->prev = *stack;
 		pointer->next = tmp;
 		if (tmp)
-			tmp->prev = pointer;
+				tmp->prev = pointer;
 		(*stack)->next = pointer;
 	}
 	else 
 	{
 		tmp = *stack;
 		while (tmp->next)
-			tmp = tmp->next;
+				tmp = tmp->next;
 		pointer->prev = tmp;
 		pointer->next = NULL;
 		tmp->next = pointer;

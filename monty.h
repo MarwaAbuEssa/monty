@@ -47,7 +47,8 @@ int int_failure(unsigned int line_number);
 int usage_failure(void);
 int open_failure(char *filename);
 int unknown_failure(char *opcode, unsigned int line_number);
-
+/* helper*/
+char *to_string(int n);
 
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
