@@ -1,6 +1,6 @@
 #include "monty.h"
 
-void set_error(int error_code)
+
 unsigned int code_length(void);
 
 /**
