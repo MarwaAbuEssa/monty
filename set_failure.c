@@ -28,7 +28,7 @@ void set_error(int error_code)
 		new_code[i] = op_Code[i];
 		i++;
 	}
-	exit_str = get_int(error_code);
+	exit_str = to_string(error_code);
 	if (!exit_str)
 	{
 		free(new_code);
