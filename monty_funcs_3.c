@@ -26,12 +26,12 @@ void _pchar(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL)
 	{
-		set_op_tok_failure(pchar_failure(line_number, "stack empty"));
+		set_failure(pchar_failure(line_number, "stack empty"));
 		return;
 	}
 	if ((*stack)->next->n < 0 || (*stack)->next->n > 127)
 	{
-		set_op_tok_failure(pchar_failure(line_number,
+		set_failure(pchar_failure(line_number,
 					     "value out of range"));
 		return;
 	}

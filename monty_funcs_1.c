@@ -19,13 +19,13 @@ void _push(stack_t **stack, unsigned int line_number)
 	new = malloc(sizeof(stack_t));
 	if (new == NULL)
 	{
-		set_op_tok_failure(malloc_failure());
+		set_failure(malloc_failure());
 		return;
 	}
 
 	if (op_Code[1] == NULL)
 	{
-		set_op_tok_failure(no_int_failure(line_number));
+		set_failure(int_failure(line_number));
 		return;
 	}
 
@@ -35,7 +35,7 @@ void _push(stack_t **stack, unsigned int line_number)
 			continue;
 		if (op_Code[1][i] < '0' || op_Code[1][i] > '9')
 		{
-			set_op_tok_failure(no_int_failure(line_number));
+			set_failure(int_failure(line_number));
 			return;
 		}
 	}
@@ -87,7 +87,7 @@ void _pint(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL)
 	{
-		set_op_tok_failure(pint_failure(line_number));
+		set_failure(pint_failure(line_number));
 		return;
 	}
 
@@ -106,7 +106,7 @@ void _pop(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL)
 	{
-		set_op_tok_failure(pop_failure(line_number));
+		set_failure(pop_failure(line_number));
 		return;
 	}
 
@@ -128,7 +128,7 @@ void _swap(stack_t **stack, unsigned int line_number)
 
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		set_op_tok_failure(short_stack_failure(line_number, "swap"));
+		set_failure(stack_failure(line_number, "swap"));
 		return;
 	}
 

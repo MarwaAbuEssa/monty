@@ -55,9 +55,9 @@ int check_mode(stack_t *stack);
 void free_tokens(void);
 unsigned int token_arr_len(void);
 int run_monty(FILE *script_fd);
-void set_op_tok_failure(int error_code);
+void set_failure(int error_code);
 
-/* OPCODE FUNCTIONS */
+
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
 void _pint(stack_t **stack, unsigned int line_number);
@@ -76,7 +76,7 @@ void _rotr(stack_t **stack, unsigned int line_number);
 void _stack(stack_t **stack, unsigned int line_number);
 void _queue(stack_t **stack, unsigned int line_number);
 
-/* CUSTOM STANDARD LIBRARY FUNCTIONS */
+
 char **strtow(char *str, char *delims);
 char *get_int(int n);
 
@@ -85,10 +85,10 @@ int usage_failure(void);
 int malloc_failure(void);
 int f_open_failure(char *filename);
 int unknown_op_failure(char *opcode, unsigned int line_number);
-int no_int_failure(unsigned int line_number);
+int int_failure(unsigned int line_number);
 int pop_failure(unsigned int line_number);
 int pint_failure(unsigned int line_number);
-int short_stack_failure(unsigned int line_number, char *op);
+int stack_failure(unsigned int line_number, char *op);
 int div_failure(unsigned int line_number);
 int pchar_failure(unsigned int line_number, char *message);
 

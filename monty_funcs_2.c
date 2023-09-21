@@ -19,7 +19,7 @@ void _add(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		set_op_tok_failure(short_stack_failure(line_number, "add"));
+		set_failure(stack_failure(line_number, "add"));
 		return;
 	}
 
@@ -40,7 +40,7 @@ void _sub(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		set_op_tok_failure(short_stack_failure(line_number, "sub"));
+		set_failure(stack_failure(line_number, "sub"));
 		return;
 	}
 
@@ -61,13 +61,13 @@ void _div(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		set_op_tok_failure(short_stack_failure(line_number, "div"));
+		set_failure(stack_failure(line_number, "div"));
 		return;
 	}
 
 	if ((*stack)->next->n == 0)
 	{
-		set_op_tok_failure(div_failure(line_number));
+		set_failure(div_failure(line_number));
 		return;
 	}
 
@@ -88,7 +88,7 @@ void _mul(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		set_op_tok_failure(short_stack_failure(line_number, "mul"));
+		set_failure(stack_failure(line_number, "mul"));
 		return;
 	}
 
@@ -109,13 +109,13 @@ void _mod(stack_t **stack, unsigned int line_number)
 {
 	if ((*stack)->next == NULL || (*stack)->next->next == NULL)
 	{
-		set_op_tok_failure(short_stack_failure(line_number, "mod"));
+		set_failure(stack_failure(line_number, "mod"));
 		return;
 	}
 
 	if ((*stack)->next->n == 0)
 	{
-		set_op_tok_failure(div_failure(line_number));
+		set_failure(div_failure(line_number));
 		return;
 	}
 

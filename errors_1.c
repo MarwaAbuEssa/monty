@@ -4,7 +4,7 @@ int usage_failure(void);
 int malloc_failure(void);
 int f_open_failure(char *filename);
 int unknown_op_failure(char *opcode, unsigned int line_number);
-int no_int_failure(unsigned int line_number);
+int int_failure(unsigned int line_number);
 
 /**
  * usage_failure - Prints usage error messages.
@@ -55,12 +55,12 @@ int unknown_op_failure(char *opcode, unsigned int line_number)
 }
 
 /**
- * no_int_failure - Prints invalid _push argument error messages.
+ * int_failure - Prints invalid _push argument error messages.
  * @line_number: Line number in Monty bytecodes file where error occurred.
  *
  * Return: (EXIT_FAILURE) always.
  */
-int no_int_failure(unsigned int line_number)
+int int_failure(unsigned int line_number)
 {
 	fprintf(stderr, "L%u: usage: push integer\n", line_number);
 	return (EXIT_FAILURE);

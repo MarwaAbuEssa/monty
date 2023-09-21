@@ -1,10 +1,10 @@
 #include "monty.h"
 
 /**
- * set_op_tok_failure - Sets last element of op_Code to be an error code.
+ * set_failure - Sets last element of op_Code to be an error code.
  * @error_code: Integer to store as a string in op_Code.
  */
-void set_op_tok_failure(int error_code)
+void set_failure(int error_code)
 {
 	int toks_len = 0, i = 0;
 	char *exit_str = NULL;
