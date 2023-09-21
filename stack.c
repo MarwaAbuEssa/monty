@@ -1,9 +1,22 @@
 #include "monty.h"
 #include <string.h>
 
+void _stack(stack_t **stack, unsigned int line_number);
 void free_stack(stack_t **stack);
-int init_stack(stack_t **stack);
+int create(stack_t **stack);
 int stack_Type(stack_t *stack);
+
+
+/**
+ * _stack -  queue to a stack.
+ * @stack: stack pointer.
+ * @line_number: line number.
+ */
+void _stack(stack_t **stack, unsigned int line_number)
+{
+	(*stack)->n = STACK;
+	(void)line_number;
+}
 
 /**
  * free_stack - Frees a stack_t stack.
@@ -23,14 +36,14 @@ void free_stack(stack_t **stack)
 }
 
 /**
- * init_stack - Initializes a stack_t stack with beginning
+ * create - Initializes a stack_t stack with beginning
  *              stack and ending queue nodes.
  * @stack: A pointer to an unitialized stack_t stack.
  *
  * Return: If an error occurs - EXIT_FAILURE.
  *         Otherwise - EXIT_SUCCESS.
  */
-int init_stack(stack_t **stack)
+int create(stack_t **stack)
 {
 	stack_t *s;
 

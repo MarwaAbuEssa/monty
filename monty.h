@@ -50,7 +50,7 @@ typedef struct instruction_s
 
 
 void free_stack(stack_t **stack);
-int init_stack(stack_t **stack);
+int create(stack_t **stack);
 int stack_Type(stack_t *stack);
 void free_tokens(void);
 unsigned int token_arr_len(void);
