@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-char **op_Code = NULL;
+
 void free_tokens(void);
 void free_stack(stack_t **stack);
 int init_stack(stack_t **stack);
@@ -19,10 +19,10 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int);
 int starting(FILE *file_script);
 
 /**
- * main - the entry point 
+ * main - the entry point
  * @argc:  arguments
  * @argv:  arguments
- * Return: (EXIT_SUCCESS) or (EXIT_FAILURE) 
+ * Return: (EXIT_SUCCESS) or (EXIT_FAILURE)
  */
 int main(int argc, char **argv)
 {
@@ -48,15 +48,15 @@ int main(int argc, char **argv)
 int starting(FILE *file_script)
 {
 	stack_t *stack = NULL;
-	char *line = NULL; 
-    size_t exit_status = EXIT_SUCCESS;
+	char *line = NULL;
+	size_t exit_status = EXIT_SUCCESS;
 	unsigned int line_number = 0, prev_tok_len = 0;
 	void (*op_func)(stack_t**, unsigned int);
 
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	while (fgets(line, sizeof(line), file_script) != 0 )
+	while (fgets(line, sizeof(line), file_script) != 0)
 	{
 		line_number++;
 		op_Code = strtow(line, DELIMS);
@@ -170,3 +170,4 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int)
 	}
 	return (NULL);
 }
+
