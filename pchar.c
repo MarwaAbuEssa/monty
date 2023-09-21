@@ -3,12 +3,12 @@
 
 
 void _pchar(stack_t **stack, unsigned int line_number);
+int pchar_failure(unsigned int line_number, char *message);
 
 /**
- * _pchar - Prints the character in the top value
- *               node of a stack_t linked list.
- * @stack: A pointer to the top mode node of a stack_t linked list.
- * @line_number: The current working line number of a Monty bytecodes file.
+ * _pchar - character of last in stack
+ * @stack: stack pointer.
+ * @line_number: ine number.
  */
 void _pchar(stack_t **stack, unsigned int line_number)
 {
@@ -26,4 +26,15 @@ void _pchar(stack_t **stack, unsigned int line_number)
 	printf("%c\n", (*stack)->next->n);
 }
 
+/**
+ * pchar_failure - pchar error messages
+ * @line_number: line number.
+ * @message: error message.
+ * Return: (EXIT_FAILURE).
+ */
+int pchar_failure(unsigned int line_number, char *message)
+{
+	fprintf(stderr, "L%u: can't pchar, %s\n", line_number, message);
+	return (EXIT_FAILURE);
+}
 

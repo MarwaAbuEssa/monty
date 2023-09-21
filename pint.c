@@ -1,7 +1,7 @@
 #include "monty.h"
 
 void _pint(stack_t **stack, unsigned int line_number);
-
+int pint_failure(unsigned int line_number);
 /**
  * _pint - print stack.
  * @stack: stack pointer.
@@ -16,6 +16,17 @@ void _pint(stack_t **stack, unsigned int line_number)
 	}
 
 	printf("%d\n", (*stack)->next->n);
+}
+
+/**
+ * pint_failure - pint error messagess.
+ * @line_number: line number.
+ * Return: (EXIT_FAILURE).
+ */
+int pint_failure(unsigned int line_number)
+{
+	fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
+	return (EXIT_FAILURE);
 }
 
 

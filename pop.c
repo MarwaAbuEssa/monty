@@ -2,6 +2,7 @@
 
 
 void _pop(stack_t **stack, unsigned int line_number);
+int pop_failure(unsigned int line_number);
 
 /**
  * _pop - remove last element.
@@ -27,3 +28,14 @@ void _pop(stack_t **stack, unsigned int line_number)
 }
 
 
+/**
+ * pop_failure - pop error messages.
+ * @line_number: line number.
+ *
+ * Return: (EXIT_FAILURE).
+ */
+int pop_failure(unsigned int line_number)
+{
+	fprintf(stderr, "L%u: can't pop an empty stack\n", line_number);
+	return (EXIT_FAILURE);
+}
