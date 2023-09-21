@@ -14,6 +14,7 @@ unsigned int token_arr_len(void);
 int is_empty_line(char *line, char *delims);
 void (*get_op_func(char *opcode))(stack_t**, unsigned int);
 int run_monty(FILE *script_fd);
+ssize_t mygetline(char **lineptr, size_t *n, FILE *script_fd)
 
 /**
  * free_tokens - Frees the global op_toks array of strings.
@@ -119,16 +120,15 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int)
 int run_monty(FILE *script_fd)
 {
 	stack_t *stack = NULL;
-	char *line = '\0';
-	size_t exit_status = EXIT_SUCCESS;
-	int o_len = 0;
+	char *line = NULL;
+	size_t len = 0, exit_status = EXIT_SUCCESS;
 	unsigned int line_number = 0, prev_tok_len = 0;
 	void (*op_func)(stack_t**, unsigned int);
 
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	while (fgets(line, o_len, script_fd) != 0)
+	while (mygetline(&line, &len, script_fd) != 0)
 	{
 		line_number++;
 		op_toks = strtow(line, DELIMS);
@@ -175,4 +175,19 @@ int run_monty(FILE *script_fd)
 
 	free(line);
 	return (exit_status);
+}
+
+
+ssize_t mygetline(char **lineptr, size_t *n, FILE *stream)
+{
+    ssize_t i = 0;
+    int c;
+    while ((c = getc()) != EOF && c != '\n') {
+        if (*n == i + 1) { 
+            /* grow buffer */
+        }
+        lineptr[0][i++] = (char)c;
+    }
+    lineptr[0][i] = 0;
+    return i;
 }
