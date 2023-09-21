@@ -1,9 +1,7 @@
 
 
 #include "monty.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 
 void free_tokens(void);
 unsigned int token_arr_len(void);
