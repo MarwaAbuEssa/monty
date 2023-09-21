@@ -21,10 +21,15 @@ int main(int argc, char **argv)
 	int exit_code = EXIT_SUCCESS;
 
 	if (argc != 2)
+	{
 		return (usage_failure());
+	}
+		
 	file_script = fopen(argv[1], "r");
 	if (file_script == NULL)
+	{
 		return (file_failure(argv[1]));
+	}
 	exit_code = start(file_script);
 	fclose(file_script);
 	return (exit_code);
