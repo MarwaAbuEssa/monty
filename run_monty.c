@@ -1,7 +1,4 @@
-
-
 #include "monty.h"
-
 
 void free_tokens(void);
 unsigned int token_arr_len(void);
@@ -10,31 +7,31 @@ void (*get_op_func(char *opcode))(stack_t**, unsigned int);
 int run_monty(FILE *script_fd);
 
 /**
- * free_tokens - Frees the global op_toks array of strings.
+ * free_tokens - Frees the global op_Code array of strings.
  */
 void free_tokens(void)
 {
 	size_t i = 0;
 
-	if (op_toks == NULL)
+	if (op_Code == NULL)
 		return;
 
-	for (i = 0; op_toks[i]; i++)
-		free(op_toks[i]);
+	for (i = 0; op_Code[i]; i++)
+		free(op_Code[i]);
 
-	free(op_toks);
+	free(op_Code);
 }
 
 /**
- * token_arr_len - Gets the length of current op_toks.
+ * token_arr_len - Gets the length of current op_Code.
  *
- * Return: Length of current op_toks (as int).
+ * Return: Length of current op_Code (as int).
  */
 unsigned int token_arr_len(void)
 {
 	unsigned int toks_len = 0;
 
-	while (op_toks[toks_len])
+	while (op_Code[toks_len])
 		toks_len++;
 	return (toks_len);
 }
@@ -74,23 +71,23 @@ int is_empty_line(char *line, char *delims)
 void (*get_op_func(char *opcode))(stack_t**, unsigned int)
 {
 	instruction_t op_funcs[] = {
-		{"push", monty_push},
-		{"pall", monty_pall},
-		{"pint", monty_pint},
-		{"pop", monty_pop},
-		{"swap", monty_swap},
-		{"add", monty_add},
-		{"nop", monty_nop},
-		{"sub", monty_sub},
-		{"div", monty_div},
-		{"mul", monty_mul},
-		{"mod", monty_mod},
-		{"pchar", monty_pchar},
-		{"pstr", monty_pstr},
-		{"rotl", monty_rotl},
-		{"rotr", monty_rotr},
-		{"stack", monty_stack},
-		{"queue", monty_queue},
+		{"push", _push},
+		{"pall", _pall},
+		{"pint", _pint},
+		{"pop", _pop},
+		{"swap", _swap},
+		{"add", _add},
+		{"nop", _nop},
+		{"sub", _sub},
+		{"div", _div},
+		{"mul", _mul},
+		{"mod", _mod},
+		{"pchar", _pchar},
+		{"pstr", _pstr},
+		{"rotl", _rotl},
+		{"rotr", _rotr},
+		{"stack", _stack},
+		{"queue", _queue},
 		{NULL, NULL}
 	};
 	int i;
@@ -124,24 +121,24 @@ int run_monty(FILE *script_fd)
 	while (getline(&line, &len, script_fd) > 0)
 	{
 		line_number++;
-		op_toks = strtow(line, DELIMS);
-		if (op_toks == NULL)
+		op_Code = strtow(line, DELIMS);
+		if (op_Code == NULL)
 		{
 			if (is_empty_line(line, DELIMS))
 				continue;
 			free_stack(&stack);
-			return (malloc_error());
+			return (malloc_failure());
 		}
-		else if (op_toks[0][0] == '#') /* comment line */
+		else if (op_Code[0][0] == '#') /* comment line */
 		{
 			free_tokens();
 			continue;
 		}
-		op_func = get_op_func(op_toks[0]);
+		op_func = get_op_func(op_Code[0]);
 		if (op_func == NULL)
 		{
 			free_stack(&stack);
-			exit_status = unknown_op_error(op_toks[0], line_number);
+			exit_status = unknown_op_failure(op_Code[0], line_number);
 			free_tokens();
 			break;
 		}
@@ -149,8 +146,8 @@ int run_monty(FILE *script_fd)
 		op_func(&stack, line_number);
 		if (token_arr_len() != prev_tok_len)
 		{
-			if (op_toks && op_toks[prev_tok_len])
-				exit_status = atoi(op_toks[prev_tok_len]);
+			if (op_Code && op_Code[prev_tok_len])
+				exit_status = atoi(op_Code[prev_tok_len]);
 			else
 				exit_status = EXIT_FAILURE;
 			free_tokens();
@@ -163,7 +160,7 @@ int run_monty(FILE *script_fd)
 	if (line && *line == 0)
 	{
 		free(line);
-		return (malloc_error());
+		return (malloc_failure());
 	}
 
 	free(line);
