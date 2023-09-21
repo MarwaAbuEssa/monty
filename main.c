@@ -56,7 +56,7 @@ int starting(FILE *file_script)
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	while (fgets(line, sizeof(line), file_script) != 0)
+	while (fgets(line, sizeof(line), file_script))
 	{
 		line_number++;
 		op_Code = strtow(line, DELIMS);
