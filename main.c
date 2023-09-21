@@ -24,7 +24,7 @@ int main(int argc, char **argv)
 	{
 		return (usage_failure());
 	}
-		
+	
 	file_script = fopen(argv[1], "r");
 	if (file_script == NULL)
 	{
