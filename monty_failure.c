@@ -65,9 +65,9 @@ int int_failure(unsigned int line_number)
 
 /**
  * set_failure - assign error code.
- * @error_code: op_Code.
+ * @code: op_Code.
  */
-void set_failure(int error_code)
+void set_failure(int code)
 {
 	int toks_len = 0, i = 0;
 	char *exit_str = NULL;
@@ -85,7 +85,7 @@ void set_failure(int error_code)
 		new_toks[i] = op_Code[i];
 		i++;
 	}
-	exit_str = get_int(error_code);
+	exit_str = get_int(code);
 	if (!exit_str)
 	{
 		free(new_toks);

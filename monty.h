@@ -55,7 +55,7 @@ int stack_Type(stack_t *stack);
 void free_tokens(void);
 unsigned int token_arr_len(void);
 int run_monty(FILE *script_fd);
-void set_failure(int error_code);
+void set_failure(int code);
 
 
 void _push(stack_t **stack, unsigned int line_number);
