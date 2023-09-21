@@ -51,7 +51,7 @@ typedef struct instruction_s
 
 void free_stack(stack_t **stack);
 int init_stack(stack_t **stack);
-int check_mode(stack_t *stack);
+int stack_Type(stack_t *stack);
 void free_tokens(void);
 unsigned int token_arr_len(void);
 int run_monty(FILE *script_fd);
@@ -80,7 +80,7 @@ void _queue(stack_t **stack, unsigned int line_number);
 char **strtow(char *str, char *delims);
 char *get_int(int n);
 
-/* ERROR MESSAGES & ERROR CODES */
+
 int usage_failure(void);
 int malloc_failure(void);
 int f_open_failure(char *filename);

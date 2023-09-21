@@ -3,7 +3,7 @@
 
 void free_stack(stack_t **stack);
 int init_stack(stack_t **stack);
-int check_mode(stack_t *stack);
+int stack_Type(stack_t *stack);
 
 /**
  * free_stack - Frees a stack_t stack.
@@ -48,7 +48,7 @@ int init_stack(stack_t **stack)
 }
 
 /**
- * check_mode - Checks if a stack_t linked list is in stack or queue mode.
+ * stack_Type - Checks if a stack_t linked list is in stack or queue mode.
  * @stack: A pointer to the top (stack) or bottom (queue)
  *         of a stack_t linked list.
  *
@@ -56,7 +56,7 @@ int init_stack(stack_t **stack)
  *         If the stack_t is in queue mode - QUEUE (1).
  *         Otherwise - 2.
  */
-int check_mode(stack_t *stack)
+int stack_Type(stack_t *stack)
 {
 	if (stack->n == STACK)
 		return (STACK);

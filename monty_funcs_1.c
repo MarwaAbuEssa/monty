@@ -41,7 +41,7 @@ void _push(stack_t **stack, unsigned int line_number)
 	}
 	new->n = atoi(op_Code[1]);
 
-	if (check_mode(*stack) == STACK) /* STACK mode insert at front */
+	if (stack_Type(*stack) == STACK) /* STACK mode insert at front */
 	{
 		tmp = (*stack)->next;
 		new->prev = *stack;
