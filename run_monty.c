@@ -10,7 +10,6 @@ unsigned int token_arr_len(void);
 int is_empty_line(char *line, char *delims);
 void (*get_op_func(char *opcode))(stack_t**, unsigned int);
 int run_monty(FILE *script_fd);
-ssize_t mygetline(char **lineptr, size_t *n, FILE *script_fd)
 
 /**
  * free_tokens - Frees the global op_toks array of strings.
@@ -124,7 +123,7 @@ int run_monty(FILE *script_fd)
 	if (init_stack(&stack) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 
-	while (fgets(line, sizeof(line), script_fd) != NULL)
+	while (getline(&line, &len, script_fd) > 0)
 	{
 		line_number++;
 		op_toks = strtow(line, DELIMS);
@@ -173,26 +172,3 @@ int run_monty(FILE *script_fd)
 	return (exit_status);
 }
 
-/**
- * mygetline - Primary function to execute a Monty bytecodes script.
- * lineptr: File descriptor for an open Monty bytecodes script.
- * n: number
- * script_fd: buffer
- * Return: EXIT_SUCCESS on success, respective error code on failure.
- */
-ssize_t mygetline(char **lineptr, size_t *n, FILE *script_fd)
-{
-    ssize_t i = 0;
-    int c;
-    while ((c = getc()) != EOF && c != '\n')
-	{
-        if (*n == i + 1)
-		{ 
-            /* grow buffer */
-			lineptr[0][i++] = (char)c;
-        }
-        
-    }
-    lineptr[0][i] = 0;
-    return i;
-}
