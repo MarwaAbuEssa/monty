@@ -12,7 +12,7 @@ char **op_Code = NULL;
  * main - the entry point
  * @argc:  arguments
  * @argv:  arguments
- * Return: (EXIT_SUCCESS) or (EXIT_FAILURE)
+ * Return: SUCCESS or FAILURE
  */
 
 int main(int argc, char **argv)
@@ -31,7 +31,7 @@ int main(int argc, char **argv)
 }
 
 /**
- * free_opcode - Frees the global op_Code array of strings.
+ * free_opcode - frees  op_Code.
  */
 void free_opcode(void)
 {
@@ -61,12 +61,10 @@ unsigned int opcode_length(void)
 }
 
 /**
- * check_line - Checks if a line read from getline only contains delimiters.
- * @line: A pointer to the line.
- * @delims: A string of delimiter characters.
- *
- * Return: If the line only contains delimiters - 1.
- *         Otherwise - 0.
+ * check_line - get line .
+ * @line: liune pointer
+ * @delims: delimiter.
+ * Return:  1./ 0.
  */
 int check_line(char *line, char *delims)
 {
@@ -127,7 +125,7 @@ void (*opcode_fn(char *opcode))(stack_t**, unsigned int)
 /**
  * start - start monty.
  * @file_script: file script.
- * Return: EXIT_SUCCESS or EXIT_FAILURE.
+ * Return: success or failed.
  */
 int start(FILE *file_script)
 {
@@ -151,7 +149,7 @@ int start(FILE *file_script)
 			free_stack(&stack);
 			return (malloc_failure());
 		}
-		else if (op_Code[0][0] == '#') /* comment line */
+		else if (op_Code[0][0] == '#')
 		{
 			free_opcode();
 			continue;
