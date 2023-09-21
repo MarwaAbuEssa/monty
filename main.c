@@ -8,15 +8,19 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <string.h>
 
 char **op_Code = NULL;
+void free_tokens(void);
+
+int is_empty_line(char *line, char *delims);
+void (*get_op_func(char *opcode))(stack_t**, unsigned int);
+int starting(FILE *file_script);
 
 /**
  * main - the entry point 
- *
  * @argc:  arguments
  * @argv:  arguments
- *
  * Return: (EXIT_SUCCESS) or (EXIT_FAILURE) 
  */
 int main(int argc, char **argv)
@@ -98,4 +102,84 @@ int starting(FILE *file_script)
 
 	free(line);
 	return (exit_status);
+}
+
+/**
+ * free_tokens - free tokens.
+ */
+void free_tokens(void)
+{
+	size_t i = 0;
+
+	if (op_Code == NULL)
+		return;
+
+	for (i = 0; op_Code[i]; i++)
+		free(op_Code[i]);
+
+	free(op_Code);
+}
+
+
+
+/**
+ * is_empty_line - check line has delimiter.
+ * @line: line pointer.
+ * @delims: delimiter.
+ *
+ * Return:  - 1 or 0.
+ */
+int is_empty_line(char *line, char *delims)
+{
+	int i, j;
+
+	for (i = 0; line[i]; i++)
+	{
+		for (j = 0; delims[j]; j++)
+		{
+			if (line[i] == delims[j])
+				break;
+		}
+		if (delims[j] == '\0')
+			return (0);
+	}
+
+	return (1);
+}
+
+/**
+ * get_op_func - check an opcode.
+ * @opcode: opcode.
+ * Return: pointer.
+ */
+void (*get_op_func(char *opcode))(stack_t**, unsigned int)
+{
+	instruction_t op_funcs[] = {
+		{"push", monty_push},
+		{"pall", monty_pall},
+		{"pint", monty_pint},
+		{"pop", monty_pop},
+		{"swap", monty_swap},
+		{"add", monty_add},
+		{"nop", monty_nop},
+		{"sub", monty_sub},
+		{"div", monty_div},
+		{"mul", monty_mul},
+		{"mod", monty_mod},
+		{"pchar", monty_pchar},
+		{"pstr", monty_pstr},
+		{"rotl", monty_rotl},
+		{"rotr", monty_rotr},
+		{"stack", monty_stack},
+		{"queue", monty_queue},
+		{NULL, NULL}
+	};
+	int i;
+
+	for (i = 0; op_funcs[i].opcode; i++)
+	{
+		if (strcmp(opcode, op_funcs[i].opcode) == 0)
+			return (op_funcs[i].f);
+	}
+	return (NULL);
 }

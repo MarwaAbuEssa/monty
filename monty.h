@@ -68,9 +68,13 @@ void _rotl(stack_t **stack, unsigned int line_number);
 void _rotr(stack_t **stack, unsigned int line_number);
 void _stack(stack_t **stack, unsigned int line_number);
 void _queue(stack_t **stack, unsigned int line_number);
+
 int get_type(stack_t *stack);
 void set_error(int error_code);
 int malloc_failure(void);
 unsigned int code_length(void);
+void free_tokens(void);
+int starting(FILE *file_script);
+char **strtow(char *str, char *delims);
 
 #endif 
