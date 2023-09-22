@@ -52,11 +52,23 @@ typedef struct instruction_s
 void free_stack(stack_t **stack);
 int create(stack_t **stack);
 int stack_Type(stack_t *stack);
+
+
+int usage_failure(void);
+int malloc_failure(void);
+int file_failure(char *filename);
+int unknown_failure(char *opcode, unsigned int line_number);
+int int_failure(unsigned int line_number);
+int pop_failure(unsigned int line_number);
+int pint_failure(unsigned int line_number);
+int stack_failure(unsigned int line_number, char *op);
+int div_failure(unsigned int line_number);
+int pchar_failure(unsigned int line_number, char *message);
+
 void free_opcode(void);
 unsigned int opcode_length(void);
 int start(FILE *file_script);
 void set_failure(int code);
-
 
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
@@ -81,15 +93,6 @@ char **strtow(char *str, char *delims);
 char *get_int(int n);
 
 
-int usage_failure(void);
-int malloc_failure(void);
-int file_failure(char *filename);
-int unknown_failure(char *opcode, unsigned int line_number);
-int int_failure(unsigned int line_number);
-int pop_failure(unsigned int line_number);
-int pint_failure(unsigned int line_number);
-int stack_failure(unsigned int line_number, char *op);
-int div_failure(unsigned int line_number);
-int pchar_failure(unsigned int line_number, char *message);
+
 
 #endif 
